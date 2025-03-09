@@ -8,6 +8,11 @@ super.new(name,parent);
 `uvm_info("--SEQUENCER_CLASS--","INSIDE CONSTRUCTOR",UVM_HIGH);
 endfunction
 
+function void start_of_simulation_phase(uvm_phase phase);
+super.start_of_simulation_phase(phase);
+
+`uvm_info("--SEQUENCER_CLASS--","START OF SIMULATION PHASE",UVM_HIGH);
+endfunction
 
 function void build_phase(uvm_phase phase);
 super.build_phase(phase);
