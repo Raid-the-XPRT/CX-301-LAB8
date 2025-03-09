@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "/home/Raid_Al-Tamimi/Verification/Labs/Lab8/Task1_uvc/sv/yapp_pkg.sv"
+`include "/home/Raid_Al-Tamimi/Verification/Labs/Lab8/Task2_factory/sv/yapp_pkg.sv"
 import uvm_pkg::*;
 
 `include "uvm_macros.svh"
@@ -28,7 +28,7 @@ alu DUT(
 always #2 clk = ~clk; 
 
 initial begin
-    run_test("yapp_tx_test");
+    run_test("configuration_test");
 end
 
 //initial begin

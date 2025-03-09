@@ -1,58 +1,43 @@
-class yapp_tx_test extends uvm_test;
+class yapp_tx_env extends uvm_env;
 
-`uvm_component_utils(yapp_tx_test);
+`uvm_component_utils(yapp_tx_env);
 
-yapp_tx_env env;
+yapp_tx_agent agent;
+
+//alu_scoreboard scoreboard;
 
 
-//alu_base_sequence base1;
-//alu_test_sequence test1;
+function new(string name = "yapp_tx_env", uvm_component parent);
+super.new(name,parent); 
+`uvm_info("--ENV_CLASS--","INSIDE CONSTRUCTOR",UVM_HIGH);
+endfunction
 
-function new(string name = "yapp_tx_test", uvm_component parent);
-super.new(name,parent);
-`uvm_info("TEST_CLASS","INSIDE CONSTRUCTOR",UVM_HIGH);
+function void start_of_simulation_phase(uvm_phase phase);
+super.start_of_simulation_phase(phase);
+`uvm_info("--ENV_CLASS--","START OF SIMULATION PHASE",UVM_HIGH);
 endfunction
 
 
 function void build_phase(uvm_phase phase);
 super.build_phase(phase);
-`uvm_info("TEST_CLASS","INSIDE BUILD PHASE",UVM_HIGH);
-env = yapp_tx_env::type_id::create("env",this);
+`uvm_info("--ENV_CLASS--","INSIDE BUILD PHASE",UVM_HIGH);
+agent = yapp_tx_agent::type_id::create("agent",this); 
+//scoreboard= alu_scoreboard::type_id::create("scoreboard",this);
 endfunction
 
 
 
 function void connect_phase(uvm_phase phase);
 super.connect_phase(phase);
-`uvm_info("TEST_CLASS","INSIDE CONNECT PHASE",UVM_HIGH);
-
-//connect monitor with scoreboard
-
+`uvm_info("--ENV_CLASS--","INSIDE CONNECT PHASE",UVM_HIGH);
+//agent.monitor.mon_port.connect(scoreboard.scoreboard_port);
 endfunction
 
 
 task run_phase(uvm_phase phase);
 super.run_phase(phase);
-`uvm_info("TEST_CLASS","INSIDE RUN PHASE",UVM_HIGH);
-
-/*
-phase.raise_objection(this);
-
-//start the sequences
-base1= alu_base_sequence::type_id::create("base1");
-base1.start(env.agent.sequencer);
-
-repeat (100) begin
-test1=alu_test_sequence::type_id::create("test1");
-test1.start(env.agent.sequencer);
-end
-
-
-phase.drop_objection(this);
-*/
-    uvm_top.print_topology();
-
+`uvm_info("--ENV_CLASS--","INSIDE RUN PHASE",UVM_HIGH);
 //LOGIC
 endtask
 
-endclass: yapp_tx_test
+endclass: yapp_tx_env
