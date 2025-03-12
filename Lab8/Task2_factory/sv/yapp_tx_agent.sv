@@ -19,11 +19,12 @@ endfunction
 function void build_phase(uvm_phase phase);
 super.build_phase(phase);
 `uvm_info("--AGENT_CLASS--","INSIDE BUILD PHASE",UVM_HIGH);
+if(is_active==UVM_ACTIVE)
+begin
 driver = yapp_tx_driver::type_id::create("driver",this);
-monitor= yapp_tx_monitor::type_id::create("monitor",this);
 sequencer=yapp_tx_sequencer::type_id::create("sequencer",this);
-
-
+end
+monitor= yapp_tx_monitor::type_id::create("monitor",this);
 endfunction
 
 
@@ -35,7 +36,8 @@ endfunction
 function void connect_phase(uvm_phase phase);
 super.connect_phase(phase);
 `uvm_info("--AGENT_CLASS--","INSIDE CONNECT PHASE",UVM_HIGH);
-driver.seq_item_port.connect(sequencer.seq_item_export);
+
+if(is_active==UVM_ACTIVE) driver.seq_item_port.connect(sequencer.seq_item_export);
 
 endfunction
 

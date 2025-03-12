@@ -35,15 +35,6 @@ endfunction
 
 
 
-function void connect_phase(uvm_phase phase);
-super.connect_phase(phase);
-`uvm_info("TEST_CLASS","INSIDE CONNECT PHASE",UVM_HIGH);
-
-//connect monitor with scoreboard
-
-endfunction
-
-
 task run_phase(uvm_phase phase);
 super.run_phase(phase);
 `uvm_info("TEST_CLASS","INSIDE RUN PHASE",UVM_HIGH);

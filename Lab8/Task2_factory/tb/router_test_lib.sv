@@ -23,15 +23,17 @@ function void build_phase(uvm_phase phase);
 super.build_phase(phase);
 `uvm_info("TEST_CLASS","INSIDE BUILD PHASE",UVM_HIGH);
 
- uvm_config_wrapper::set(this, "env.agent.sequencer.run_phase",
-                                "default_sequence",
-                                yapp_5_packets::get_type());
+ //uvm_config_wrapper::set(this, "env.agent.sequencer.run_phase",
+ //                               "default_sequence",
+ //                               yapp_5_packets::get_type());
 
                                 
 
 env = yapp_tx_env::type_id::create("env",this);
 
 uvm_config_int::set(this,"*","recording_detail",1);
+
+
 
 endfunction
 
@@ -144,6 +146,22 @@ base1.start(env.agent.sequencer);
 repeat (100) begin
 test1=alu_test_sequence::type_id::create("test1");
 test1.start(env.agent.sequencer);
+//                                "default_sequence",
+//                                yapp_5_packets::get_type());
+
+uvm_config_int::set(this,"*agent*","is_active",UVM_PASSIVE);
+                                
+
+//env = yapp_tx_env::type_id::create("env",this);
+
+//uvm_config_int::set(this,"*","recording_detail",1);
+
+endfunction
+
+//function void check(uvm_phase phase);
+//super.check(phase);
+//check_config_usage();
+//endfunction
 end
 
 
@@ -185,11 +203,11 @@ super.build_phase(phase);
 set_type_override_by_type(yapp_packet::get_type(),short_yapp_packet::get_type());
 
 
-// uvm_config_wrapper::set(this, "env.agent.sequencer.run_phase",
-//                                "default_sequence",
-//                                yapp_5_packets::get_type());
+ uvm_config_wrapper::set(this, "env.agent.sequencer.run_phase",
+                                "default_sequence",
+                                yapp_5_packets::get_type());
 
-uvm_config_int::set(this,"*agent*","is_active",UVM_PASSIVE);
+uvm_config_int::set(this,"*agent*","is_active",UVM_ACTIVE);
                                 
 
 //env = yapp_tx_env::type_id::create("env",this);

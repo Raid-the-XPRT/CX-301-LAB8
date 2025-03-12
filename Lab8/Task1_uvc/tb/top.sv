@@ -4,6 +4,8 @@ import uvm_pkg::*;
 
 `include "uvm_macros.svh"
 
+`include "router_tb.sv"
+`include "router_test_lib.sv"
 
 module top;
     
